@@ -1,39 +1,57 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
-const TodoForm = ()=>{
+const useInputValue = (initialValue)=>{
+ const [value, setValue] = useState(initialValue)
 
-    const{types, setTypes}= useState({
-        type:"",
-        description:"",
-        responsable:"",
-        priority:"low"
-    });
+ const onChange = e=> setValue(e.target.value)
 
-    return(
-        <div className="card">
-            <form className="card-body">
-                <div className="form-group">
-                    <input type="text" name="title" class="form-control" placeholder="Title"/>
-                </div>
-                <div className="form-group">
-                    <input type="text" name="description" class="form-control" placeholder="Description"/>
-                </div>
-                <div className="form-group">
-                    <input type="text" name="responsable" class="form-control" placeholder="Responsable"/>
-                </div>
-                <div className="form-group">
-                    <select name="priority" className="form-control">
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    );
+ return {value, onChange}
 }
+
+
+const TodoForm = ( {onAddTodo} ) => {
+	const title = useInputValue("")
+	const description = useInputValue("")
+	const responsable = useInputValue("")
+	const priority = useInputValue("Low")
+
+	const onSubmit=(e)=>{
+		e.preventDefault()
+		onAddTodo({
+			title: title.value, 
+			description: description.value, 
+			responsable: responsable.value, 
+			priority: priority.value
+		})
+	}
+	// console.log({title, description, responsable, priority})
+	return (
+		<div className='card'>
+			<form className='card-body' onSubmit={onSubmit}>
+				<div className='form-group'>
+					<input className='form-control' placeholder='Title' {...title}/>
+				</div>
+				<div className='form-group'>
+					<input className='form-control' placeholder='Description' {...description}/>
+				</div>
+				<div className='form-group'>
+					<input className='form-control' placeholder='Responsable' {...responsable}/>
+				</div>
+				<div className='form-group'>
+					<select className='form-control' {...priority}>
+						<option>High</option>
+						<option>Medium</option>
+						<option>Low</option>
+					</select>
+				</div>
+				<div className='form-group'>
+					<button type='submit' className='btn btn-primary'>
+						Save
+					</button>
+				</div>
+			</form>
+		</div>
+	);
+};
 
 export default TodoForm;

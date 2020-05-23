@@ -1,16 +1,16 @@
 import React from 'react';
 
-function Navegation(props) {
+function Navegation({titulo, data, logo}) {
     return(
         <div>
             <nav className="navbar navbar-dark bg-dark">
-                <a href="www.google.com" className="text-white">
-                    {props.titulo}
-                    <span className="badge badge-pill badge-light ml-2">
-                        {props.Bum.length}
+                <a href="/" className="text-white">
+                    {titulo}
+                    <span className="badge badge-pill badge-light ml-3">
+                        {data.length}
                     </span>
                 </a>
-                <img src={props.logo}  className="App-logo" alt="logo" />
+                <img src={logo}  className="App-logo" alt="logo" />
             </nav>  
         </div>
     );
