@@ -16,7 +16,7 @@ const TodoForm = ( {onAddTodo} ) => {
 	const priority = useInputValue("Low")
 
 	const onSubmit=(e)=>{
-		e.preventDefault()
+		e.preventDefault()	
 		onAddTodo({
 			title: title.value, 
 			description: description.value, 
@@ -24,7 +24,6 @@ const TodoForm = ( {onAddTodo} ) => {
 			priority: priority.value
 		})
 	}
-	// console.log({title, description, responsable, priority})
 	return (
 		<div className='card'>
 			<form className='card-body' onSubmit={onSubmit}>
